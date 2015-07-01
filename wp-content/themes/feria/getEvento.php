@@ -61,7 +61,7 @@ $myQuery = new WP_Query(array(
       <div class="element <?php echo $class.' '.$evento_class ?>">
         <h2><?php the_title(); ?></h2>  
         <ul>
-          <i class="icon-time"></i> <strong> Hora:</strong> <?php echo $humanHoraInicio ?> <?php echo ($tieneHoraFin) ? " a $humanHoraFin" : "" ?></li>
+          <li><i class="icon-time"></i> <strong> Hora:</strong> <?php echo $humanHoraInicio ?> <?php echo ($tieneHoraFin) ? " a $humanHoraFin" : "" ?></li>
           <li><i class="icon-map-marker"></i> <strong>Lugar:</strong> <?php echo $lugar ?></li>
           <li><i class="icon-star"></i> <strong>Teléfono:</strong> <?php echo $telefono ?></li>
         </ul>
@@ -134,7 +134,7 @@ $myQuery = new WP_Query(array(
                 <div class="element <?php echo $class.' '.$evento_class ?>">
                   <h2><?php the_title(); ?></h2>  
                   <ul>
-                    <i class="icon-time"></i> <strong> Hora:</strong> <?php echo $humanHoraInicio ?> <?php echo ($tieneHoraFin) ? " a $humanHoraFin" : "" ?></li>
+                    <li><i class="icon-time"></i> <strong> Hora:</strong> <?php echo $humanHoraInicio ?> <?php echo ($tieneHoraFin) ? " a $humanHoraFin" : "" ?></li>
                     <li><i class="icon-map-marker"></i> <strong>Lugar:</strong> <?php echo $lugar ?></li>
                     <li><i class="icon-star"></i> <strong>Teléfono:</strong> <?php echo $telefono ?></li>
                   </ul>
