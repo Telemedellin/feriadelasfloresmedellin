@@ -23,14 +23,13 @@
 	# END Tweaks
 # END iThemes Security
 # BEGIN WordPress
-
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteBase /
-	RewriteRule ^index\.php$ - [L]
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule . /index.php [L]
+RewriteEngine On
+RewriteBase /feriadelasfloresmedellin/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /feriadelasfloresmedellin/index.php [L]
 </IfModule>
 
 # END WordPress
