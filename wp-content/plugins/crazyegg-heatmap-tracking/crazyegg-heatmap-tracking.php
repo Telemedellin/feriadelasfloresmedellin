@@ -3,7 +3,7 @@
 Plugin Name: Crazyegg-Heatmap-Tracking
 Plugin URI: http://www.crazyegg.com/
 Description: Enables Crazyegg.com heatmap tracking on your WordPress site.
-Version: 1.0
+Version: 1.1
 Author: Crazyegg
 Author URI: http://www.crazyegg.com
 License: GPL
@@ -13,7 +13,7 @@ License: GPL
 add_action('wp_footer', 'crazyegg_tracking_code');
 
 /* Runs when plugin is activated */
-register_activation_hook(__FILE__, 'cht_install'); 
+register_activation_hook(__FILE__, 'cht_install');
 
 /* Runs on plugin deactivation*/
 register_deactivation_hook(__FILE__, 'cht_remove' );
@@ -75,8 +75,8 @@ function crazyegg_tracking_code() {
     $account_path = str_pad($account_number, 8, "0", STR_PAD_LEFT);
     $account_path = substr($account_path,0,4).'/'.substr($account_path,4,8);
     $account_path = "pages/scripts/".$account_path.".js";
-    
-    $script_host = "dnn506yrbagrg.cloudfront.net";
+
+    $script_host = "script.crazyegg.com";
 
     echo '<script type="text/javascript">
 setTimeout(function(){var a=document.createElement("script");

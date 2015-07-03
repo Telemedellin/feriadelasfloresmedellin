@@ -3,8 +3,8 @@ Contributors: futtta, turl
 Tags: css, html, javascript, js, optimize, speed, cache, data-uri, aggregate, minimize, minification, performance, pagespeed, booster, multisite
 Donate link: http://blog.futtta.be/2013/10/21/do-not-donate-to-me/
 Requires at least: 2.7
-Tested up to: 3.9.1
-Stable tag: 1.8.5
+Tested up to: 4.2
+Stable tag: 1.9.4
 
 Autoptimize speeds up your website and helps you save bandwidth by aggregating and minimizing JS, CSS and HTML.
 
@@ -17,11 +17,11 @@ If you consider performance important, you really should use a caching-plugin su
 
 == Installation ==
 
-Just install form your WordPress "Plugins|Add New" screen and all will be well. Manual installation is very straightforward as well:
+Just install from your WordPress "Plugins > Add New" screen and all will be well. Manual installation is very straightforward as well:
 
-1. Upload the zip-file and unzip it in the /wp-content/plugins/ directory
+1. Upload the zip file and unzip it in the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Go to `Settings -> Autoptimize` and enable the options you want. Generally this means "Optimize HTML/ CSS/ JavaScript".
+1. Go to `Settings > Autoptimize` and enable the options you want. Generally this means "Optimize HTML/ CSS/ JavaScript".
 
 == Frequently Asked Questions ==
 
@@ -33,18 +33,15 @@ It concatenates all scripts and styles, minifies and compresses them, adds expir
 
 Although Autoptimize comes without any warranties, it will in general work flawlessly if you configure it correctly. See "Troubleshooting" below for info on how to configure in case of problems.
 
-= What is the use of deferring CSS? =
+= What is the use of "inline and defer CSS"? =
 
-CSS in general should go in the head of the document. Recently a.o. Google started promoting deferring non-essential CSS, while inlining those styles needed to build the page above the fold. This is especially important to render pages as quickly as possible on mobile devices. To implement this, you'll need to:
+CSS in general should go in the head of the document. Recently a.o. Google started promoting deferring non-essential CSS, while inlining those styles needed to build the page above the fold. This is especially important to render pages as quickly as possible on mobile devices. As from Autoptimize 1.9.0 this is easy; select "inline and defer CSS", paste the block of "above the fold CSS" in the input field (text area) and you're good to go!
 
-* identify the essential CSS to style your average page (be strict, keep this as light a possible)
-* minimize that using one of the many online minimizing tools
-* wrap the minimized CSS between style-tags
-* wrap style-block between noptimize-tags (see above)
-* put the resulting CSS in the head of your page (should be in the header.php file of your theme)
-* check the option to defer CSS
+= But how can one find out what the "above the fold CSS" is? =
 
-= Should you inline all CSS? =
+There's no easy solution for that as "above the fold" depends on where the fold is, which in turn depends on screensize. There are some tools available however, which try to identify just what is "above the fold". [This list of tools](https://github.com/addyosmani/above-the-fold-css-tools) is a great starting point and esp. [http://jonassebastianohlsson.com/criticalpathcssgenerator/](http://jonassebastianohlsson.com/criticalpathcssgenerator/) is an easy solution if you're not into node.js yourself.
+
+= Or should you inline all CSS? =
 
 The short answer: if you just want to improve your (mobile) pagespeed score; yes, otherwise maybe not.
 
@@ -58,13 +55,20 @@ You can find more information on this topic [in this blog post](http://blog.futt
 
 = My cache is getting huge, doesn't Autoptimize purge the cache? =
 
-Autoptimize does not have its proper cache purging mechanism, as this could remove optimized CSS/JS which is still referred to in other caches which would break your site.
+Autoptimize does not have its proper cache purging mechanism, as this could remove optimized CSS/JS which is still referred to in other caches, which would break your site.
 
-You can however keep the cache size at an acceptable level by excludinng JS-variables (or sometimes CSS-selectors) that change on a per page (or per pageload) basis. You can read how you can do that [in this blogpost](http://blog.futtta.be/2014/03/19/how-to-keep-autoptimizes-cache-size-under-control-and-improve-visitor-experience/).
+You can however keep the cache size at an acceptable level by either:
+* ticking the "look only in head" option for JS and/or CSS.
+* using the API to force AO not to aggregate inline CSS or JS ("autoptimize_js_include_inline" and "autoptimize_css_include_inline" filters, see example-code in autoptimize_helper.php_example).
+* excluding JS-variables (or sometimes CSS-selectors) that change on a per page (or per pageload) basis. You can read how you can do that [in this blogpost](http://blog.futtta.be/2014/03/19/how-to-keep-autoptimizes-cache-size-under-control-and-improve-visitor-experience/).
+
+= Why is "look only in head" marked as deprecated =
+
+While "look only in head" still works, it will in the next major version be replaced by an option to choose if inline JS/ CSS should be autoptimized (which is much more useful). So this is just a small heads up, really.
 
 = What can I do with the API? =
 
-A whole lot; there are filters you can use to conditionally disable Autoptimize per request, to change the CSS- and JS-excludes, to change the limit for CSS background-images to be inlined in the CSS, to define what JS-files are moved behing the aggregated on, to change the defer-attribute on the aggregated JS script-tag,  There are examples for all filters in autoptimize_helper.php_example.
+A whole lot; there are filters you can use to conditionally disable Autoptimize per request, to change the CSS- and JS-excludes, to change the limit for CSS background-images to be inlined in the CSS, to define what JS-files are moved behing the aggregated on, to change the defer-attribute on the aggregated JS script-tag, ... There are examples for many filters in autoptimize_helper.php_example.
 
 = How can I use/ activate autoptimize_helper.php_example? =
 
@@ -72,7 +76,7 @@ Copy it to /wp-content/plugins/autoptimize_helper.php and activate it in WordPre
 
 = How does CDN work? =
 
-Starting from version 1.7.0, CDN is activated upon entering the CDN blog root directory (e.g. http://cdn.example.net/wordpress/). If that URL is present, it will used for all Autoptimize-generated files (i.e. aggregated CSS and JS), includinng background-images in the CSS (when not using data-uri's).
+Starting from version 1.7.0, CDN is activated upon entering the CDN blog root directory (e.g. http://cdn.example.net/wordpress/). If that URL is present, it will used for all Autoptimize-generated files (i.e. aggregated CSS and JS), including background-images in the CSS (when not using data-uri's).
 
 If you want your uploaded images to be on the CDN as well, you can change the upload_url_path in your WordPress configuration (/wp-admin/options.php) to the target CDN upload directory (e.g. http://cdn.example.net/wordpress/wp-content/uploads/). Do take into consideration this only works for images uploaded from that point onwards, not for images that already were uploaded. Thanks to [BeautyPirate for the tip](http://wordpress.org/support/topic/please-don%c2%b4t-remove-cdn?replies=15#post-4720048)!
 
@@ -80,13 +84,13 @@ If you want your uploaded images to be on the CDN as well, you can change the up
 
 If your webserver is properly configured to handle compression (gzip or deflate) and cache expiry (expires and cache-control with sufficient cacheability), you don't need Autoptimize to handle that for you. In that case you can check the "Save aggregated script/css as static files?"-option, which will force Autoptimize to save the aggregated files as .css and .js-files (meaning no PHP is needed to serve these files). This setting is default as of Autoptimize 1.8.
 
-= Compatibility with WP SlimSat =
+= How does "exclude from optimizing" work? =
 
-There have been reports of sightings of javascript errors when using Autoptimize together with WP SlimStat. Both [Camu (WP SlimStat developer)](http://profiles.wordpress.org/coolmann/) and I have installed both plugins on test-environments and [found no proof of such incompatibility](http://wordpress.org/support/topic/dropdown-menus-dont-work-when-slimstat-is-enabled?replies=14#post-4086894). Our common conclusion is that there are rare cases in which yet another theme or plugin's JavaScript are triggering these errors. If you do encounter JavaScript-errors when you have both WP SlimStat and Autoptimize installed, add "SlimStatParams, wp-slimstat.js" in the "Exclude scripts from autoptimize:" option on the admin-page and all should be well.
+Both CSS and JS optimization can skip code from being aggregated and minimized by adding "identifiers" to the comma-seperated exclusion list. The exact identifier string to use can be determined this way:
 
-= Problems with CSS of Kickstart theme when on WP Engine =
-
-Although multiple users are succesfully running Autoptimize on WP Engine, there is [one confirmed issue when using the Kickstart-theme with Autoptimize on WP Engine](http://wordpress.org/support/topic/zero-lenght-file-with-css-optimization). The problem is that Autoptimize can't source in the import, leading to an empty CSS-file (which does not happen when not on WP Engine). As a workaround you can link to the CSS-file from within your header.php, as suggested by [Ozum of fortibase.com](http://www.fortibase.com/)
+* if you want to exclude a specific file, e.g. wp-content/plugins/funkyplugin/css/style.css, you could simply exclude "funkyplugin/css/style.css"
+* if you want to exclude all files of a specific plugin, e.g. wp-content/plugins/funkyplugin/js/*, you can exclude for example "funkyplugin/js/" or "plugins/funkyplugin"
+* if you want to exclude inline code, you'll have to find a specific, unique string in that block of code and add that to the exclusion list. Example: to exclude "<script>funky_data='Won\'t you take me to, Funky Town'</script>", the identifier is "funky_data".
 
 = Configuring & Troubleshooting Autoptimize =
 
@@ -94,15 +98,27 @@ After having installed and activated the plugin, you'll have access to an admin 
 
 If your blog doesn't function normally after having turned on Autoptimize, here are some pointers to identify & solve such issues using "advanced settings":
 
+* If all works but you notice your blog is slower, ensure you have a page caching plugin installed (WP Super Cache or similar).
 * In case your blog looks weird, i.e. when the layout gets messed up, there is problem with CSS optimization. In this case you can turn on the option "Look for styles on just head?" and see if that solves the problem. You can also force CSS not to be aggregated by wrapping it in noptimize-tags in your theme or widget or by adding filename (for external stylesheets) or string (for inline styles) to the exclude-list.
-* In case some functionality on your site stops working (a carroussel, a menu, the search input, ...) you're likely hitting JavaScript optimization trouble. Enable the option "Look for scripts only in head?" and/or "Force JavaScript in <head>?" and/or "Add try/catch wrapping" and try again. Alternatively -for the technically savvy- you can exclude specific scripts from being treated (moved and/ or aggregated) by Autoptimize by adding a string that will match the offending Javascript or excluding it from within your template files or widgets by wrapping the code between noptimize-tags. Identifying the offending JavaScript and choosing the correct exclusion-string can be trial and error, but in the majority of cases JavaScript optimization issues can be solved this way.
+* In case some functionality on your site stops working (a carroussel, a menu, the search input, ...) you're likely hitting JavaScript optimization trouble. Enable the option "Look for scripts only in head?" and/or "Force JavaScript in <head>?" and/or "[Add try/catch wrapping](http://blog.futtta.be/2014/08/18/when-should-you-trycatch-javascript/)" and try again. Alternatively -for the technically savvy- you can exclude specific scripts from being treated (moved and/ or aggregated) by Autoptimize by adding a string that will match the offending Javascript or excluding it from within your template files or widgets by wrapping the code between noptimize-tags. Identifying the offending JavaScript and choosing the correct exclusion-string can be trial and error, but in the majority of cases JavaScript optimization issues can be solved this way.
 * If your theme uses jQuery, you can try either forcing all in head or excluding jquery(-min).js (and jQuery-plugins if needed).
 * If you can't get either CSS or JS optimization working, you can off course always continue using the other two optimization-techniques.
 * If you tried the troubleshooting tips above and you still can't get CSS and JS working at all, you can ask for support on the [WordPress Autoptimize support forum](http://wordpress.org/support/plugin/autoptimize). See below for a description of what information you should provide in your "trouble ticket"
 
-= How does "Exclude from autoptimize" work? =
+= Help, I have a blank page or an internal server error after enabling Autoptimize!! =
 
-You can exclude both JS and CSS from being processed by Autoptimize by using the appropriate settings in the admin-screen. If you want to exclude an external file from being Autoptimized, add the filename (e.g. jquery.js). If you want to exclude inline CSS or JS, add a (unique) string that is in that block of code.
+First of all make sure you're not running other HTML, CSS or JS minification plugins simultaneously with Autoptimize.
+
+In some rare cases the [CSS minification component](https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port/) currently used by Autoptimize crashes due to a lack of resources (see [detailed technical explanation here](http://blog.futtta.be/2014/01/14/irregular-expressions-have-your-stack-for-lunch/)). You can in that case either disable CSS optimization, try to exclude specific CSS from being aggregated or activate the legacy minifiers which don't have that problem. The latter can be accomplished by adding this to your wp-config.php:
+
+`define("AUTOPTIMIZE_LEGACY_MINIFIERS","true");`
+
+The "legacy minifiers" will remain in Autoptimize "for ever" and changes to wp-config.php are not affected by core-, theme- or plugin-upgrades so you should be good to go.
+
+= I use NextGen Galleries and a lot of JS is not aggregated/ minified? =
+NextGen Galleries does some nifty stuff to add JavaScript. In order for Autoptimize to be able to aggregate that, you'll need to tell it to initialize earlier, by adding this to your wp-config.php:
+
+`define("AUTOPTIMIZE_INIT_EARLIER","true");`
 
 = What is noptimize? =
 
@@ -110,6 +126,19 @@ Starting with version 1.6.6 Autoptimize excludes everything inside noptimize tag
 `<!--noptimize--><script>alert('this will not get autoptimized');</script><!--/noptimize-->`
 
 You can do this in your page/ post content, in widgets and in your theme files (consider creating [a child theme](http://codex.wordpress.org/Child_Themes) to avoid your work being overwritten by theme updates).
+
+= Can I change the directory & filename of cached autoptimize files? =
+
+Yes, if you want to serve files from e.g. /wp-content/resources/aggregated_12345.css instead of the default /wp-content/cache/autoptimize/autoptimize_12345.css, then add this to wp-config.php: 
+`
+define('AUTOPTIMIZE_CACHE_CHILD_DIR','/resources/');
+define('AUTOPTIMIZE_CACHEFILE_PREFIX','aggregated_');
+`
+
+If you changed your wp-content-folder as per [the WordPress guidelines](http://codex.wordpress.org/Editing_wp-config.php#Moving_wp-content_folder), you can tell Autoptimize about that with;
+`
+define( 'AUTOPTIMIZE_WP_CONTENT_NAME','/content' );
+`
 
 = Where can I report an error? =
 
@@ -124,11 +153,63 @@ You can report problems on the [wordpress.org support forum](http://wordpress.or
 * optionally plugins used (if you suspect one or more plugins are raising havoc)
 
 = I want out, how should I remove Autoptimize? =
+
 * Disable the plugin (this will remove options and cache)
 * Remove the plugin
 * Clear any cache that might still have pages which reference Autoptimized CSS/JS (e.g. of a page caching plugin such as WP Super Cache)
 
+= How can I help/ contribute? =
+
+Just [fork Autoptimize on Github](https://github.com/futtta/autoptimize) and code away!
+
 == Changelog ==
+
+= 1.9.4 =
+* bugfix: make sure non-AO CSSmin doesn't get fed 2 parameters (as some only expect one, which resulted in an internal server error), based on [feedback from zerooverture and zamba](https://wordpress.org/support/topic/error-code-500internal-server-error?replies=7)
+* bugfix: make default add_action hook back into "template_redirect" instead of "init" to fix multiple problems as reported by [schecteracademicservices, bond138, rickenbacker](https://wordpress.org/support/topic/192-concatenated-js-but-193-does-not-for-me?replies=11), [Rick Sportel](https://wordpress.org/support/topic/version-193-made-plugin-wp-cdn-rewrite-crash?replies=3#post-6833159) and [wizray](https://wordpress.org/support/topic/the-page-loads-both-the-auto-combined-css-file-and-origin-raw-file?replies=11#post-6833146). If you do need Autoptimize to initialize earlier (e.g. when using Nextgen Galleries), then add this to your wp-config.php:
+`define("AUTOPTIMIZE_INIT_EARLIER","true");`
+
+= 1.9.3 =
+* improvement: more intelligent CDN-replacement logic, thanks [Squazz for reporting and testing](https://wordpress.org/support/topic/enable-cdn-for-images-referenced-in-the-css?replies=9)
+* improvement: allow strings (comments) to be excluded from HTML-optimization (comment removal)
+* improvement: changed priority with which AO gets triggered by WordPress, solving JS not being aggregated when NextGen Galleries is active, with great [help from msebald](https://wordpress.org/support/topic/js-options-dont-work-if-html-disabled/)
+* improvement: extra JS exclude-strings: gist.github.com, text/html, text/template, wp-slimstat.min.js, _stq, nonce, post_id (the latter two were removed from the "manual" exclude list on the settings-page)
+* new in API: autoptimize_filter_html_exclude, autoptimize_filter_css_defer, autoptimize_filter_css_inline, autoptimize_filter_base_replace_cdn, autoptimize_filter_js_noptimize, autoptimize_filter_css_noptimize, autoptimize_filter_html_noptimize
+* bugfix: remove some PHP notices, as [reported by dimitrov.adrian](https://wordpress.org/support/topic/php-errors-39)
+* bugfix: make sure HTML-optimalization does not gobble a space before a cite [as proposed by ecdltf](https://wordpress.org/support/topic/%E2%80%9Coptimize-html%E2%80%9D-is-gobbling-whitespace-before-cite-tag)
+* bugfix: cleaning the cache did not work on non-default directories as [encountered by NoahJ Champion](https://wordpress.org/support/topic/changing-the-wp-content-path-to-top-level?replies=10#post-6573657)
+* upgraded to [yui compressor php port 2.4.8-4](https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port)
+* added arabic translation, thanks to the [ekleel team](http://www.ekleel.net)
+* tested with WordPress 4.2 beta 3
+
+= 1.9.2 =
+First of all; Happy holidays, all the best for 2015!!
+
+* New: support for alternative cache-directory and file-prefix as requested by a.o. [Jassi Bacha](https://wordpress.org/support/topic/requesthelp-add-ability-to-specify-cache-folder?replies=1#post-6300128), [Cluster666](https://wordpress.org/support/topic/rewrite-js-path?replies=6#post-6363535) and Baris Unver.
+* Improvement: hard-exclude all linked-data json objects (script type=application/ld+json)
+* Improvement: several filters added to the API, e.g. to alter optimized HTML, CSS or JS
+* Bugfix: set Autoptimize priority back from 11 to 2 (as previously) to avoid some pages not being optimized (thanks to [CaveatLector for investigating & reporting](https://wordpress.org/support/topic/wp-property-plugin-add_action-priority-incompatibility?replies=1))
+* Bugfix (in YUI-CSS-compressor-PHP-port): don't convert bools to percentages in rotate3D-transforms (cfr. [bugreport on Github](https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port/issues/17))
+* Bugfix: background images with a space in the path didn't load, [reported by johnh10](https://wordpress.org/support/topic/optimize-css-code-error-with-background-image-elements?replies=6#post-6201582).
+* Bugfix: SVG image with fill:url broken after CSS optimization as [reported by Tkama](https://wordpress.org/support/topic/one-more-broblem-with-plugin?replies=2)
+* Updated translation for Swedish, new translation for Ukrainian by [Zanatoly of SebWeo.com](http://SebWeo.com)
+* Updated readme.txt
+* Confirmed working with WordPress 4.1
+
+= 1.9.1 =
+* hard-exclude [the sidelink-search-box introduced in WP SEO v1.6](http://wordpress.org/plugins/wordpress-seo/changelog/) from JS optimization (this [broke some JS-optimization badly](http://wordpress.org/support/topic/190-breaks-js?replies=4))
+* bugfix: first add semi-colon to inline script, only then add try-catch if required instead of the other way around.
+
+= 1.9.0 =
+* "Inline and defer CSS" allows one to specify which "above the fold CSS" should be inlined, while the normal optimized CSS is deferred.
+* Inlined Base64-encoded background Images will now be cached as well and the threshold for inlining these images has been bumped up to 4096 bytes (from 2560).
+* Separate cache-directories for CSS and JS in /wp-content/cache/autoptimize, which should result in faster cache pruning (and in some cases possibly faster serving of individual aggregated files).
+* CSS is now added before the <title>-tag, JS before </body> (and after </title> when forced in head). This can be overridden in the API.
+* Some usability improvements of the administration-page
+* Multiple hooks added to the API a.o. filters to not aggregate inline CSS or JS and filters to aggregate but not minify CSS or JS.
+* Updated translations for Dutch, French, German, Persian and Polish and new translations for Brazilian Portuguese (thanks to [Leonardo Antonioli](http://tobeguarany.com/)) and Turkish (kudo's [Baris Unver](http://beyn.org/))
+* Multiple bugfixes & improvements
+* Tested with WordPress 4.0 rc3
 
 = 1.8.5 =
 * Updated to lastest version of [CSS minification component](https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port/)

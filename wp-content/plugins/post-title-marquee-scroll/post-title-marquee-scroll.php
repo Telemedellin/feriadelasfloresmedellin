@@ -3,7 +3,7 @@
 Plugin Name: Post title marquee scroll
 Description: Post title marquee scroll is a simple wordpress plugin to create the marquee scroll in the website with post title. In the admin we have option to choose the category and display order. We can add this plugin directly in the theme files. Also we have widget and short code option.
 Author: Gopi Ramasamy
-Version: 8.2
+Version: 8.5
 Plugin URI: http://www.gopiplus.com/work/2011/08/08/post-title-marquee-scroll-wordpress-plugin/
 Author URI: http://www.gopiplus.com/work/2011/08/08/post-title-marquee-scroll-wordpress-plugin/
 Donate link: http://www.gopiplus.com/work/2011/08/08/post-title-marquee-scroll-wordpress-plugin/
@@ -14,8 +14,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 function ptmsshow()
 {
 	global $wpdb;
-	date_default_timezone_set('America/Bogota');
-	setlocale(LC_ALL, 'es_ES.UTF-8');
 	$ptms_marquee = "";
 	
 	$ptms_scrollamount = get_option('ptms_scrollamount');
@@ -23,46 +21,34 @@ function ptmsshow()
 	$ptms_direction = get_option('ptms_direction');
 	$ptms_style = get_option('ptms_style');
 	
-	$ptms_noofpost 	= get_option('ptms_noofpost');
+	$ptms_noofpost = get_option('ptms_noofpost');
 	$ptms_categories = get_option('ptms_categories');
-	$ptms_orderbys 	= get_option('ptms_orderbys');
+	$ptms_orderbys = get_option('ptms_orderbys');
 	$ptms_order = get_option('ptms_order');
 	$ptms_spliter = get_option('ptms_spliter');
-	$hoy    	=   date('d/m/Y');
-    $hoyff  	=   strtotime(date('d-m-Y')) ;
-	$manana 	=   date('d/m/Y').' +1 day';
 	
 	if(!is_numeric($ptms_scrollamount)){ $ptms_scrollamount = 2; } 
 	if(!is_numeric($ptms_scrolldelay)){ $ptms_scrolldelay = 5; } 
 	if(!is_numeric($ptms_noofpost)){ $ptms_noofpost = 10; }
 	
-	$sSql = query_posts('cat='.$ptms_categories.'&orderby='.$ptms_orderbys.'&order='.$ptms_order.'&posts_per_page=-1&tag=destacado');
-
+	$sSql = query_posts('cat='.$ptms_categories.'&orderby='.$ptms_orderbys.'&order='.$ptms_order.'&showposts='.$ptms_noofpost);
+	
 	$spliter = "";
 	$ptms = "";
 	if ( ! empty($sSql) ) 
 	{
-
 		$count = 0;
-		foreach ( $sSql as $aSql ) 
+		foreach ( $sSql as $sSql ) 
 		{
-			$fechaInicio       = get_post_meta($aSql->ID,'fecha_inicio',true);
-			$fechaInicio       = str_replace('/', '-', $fechaInicio);
-			$fechaInicio       = strtotime($fechaInicio);
-
-			if( $fechaInicio == $hoyff ): 
-
-				$title = stripslashes($aSql->post_title);
-				$link = get_permalink($aSql->ID);
-				if($count > 0)
-				{
-					$spliter = $ptms_spliter;
-				}
-				$ptms = $ptms . $spliter . "<a href='".$link."'>" . $title . "</a>";
-				
-				$count = $count + 1;
-
-			endif;
+			$title = stripslashes($sSql->post_title);
+			$link = get_permalink($sSql->ID);
+			if($count > 0)
+			{
+				$spliter = $ptms_spliter;
+			}
+			$ptms = $ptms . $spliter . "<a href='".$link."'>" . $title . "</a>";
+			
+			$count = $count + 1;
 		}
 	}
 	wp_reset_query();
@@ -82,6 +68,7 @@ function ptms_shortcode( $atts )
 	global $wpdb;
 	$ptms_marquee = "";
 	
+	// [post-marguee]
 	$ptms_scrollamount = get_option('ptms_scrollamount');
 	$ptms_scrolldelay = get_option('ptms_scrolldelay');
 	$ptms_direction = get_option('ptms_direction');
@@ -105,9 +92,6 @@ function ptms_shortcode( $atts )
 	$sSqlMin = $sSqlMin . "inner join ". $wpdb->prefix . "term_relationships wpr on wpr.term_taxonomy_id = ". $wpdb->prefix . "term_taxonomy.term_taxonomy_id ";
 	$sSqlMin = $sSqlMin . "inner join ". $wpdb->prefix . "posts p on p.ID = wpr.object_id ";
 	$sSqlMin = $sSqlMin . "where taxonomy= 'category' and p.post_type = 'post' and p.post_status = 'publish'";
-
-	echo $sSqlMin ;
-	die;
 	//$sSqlMin = $sSqlMin . "order by object_id; ";
 	
 	if( ! empty($ptms_categories) )
@@ -168,16 +152,13 @@ function ptms_shortcode( $atts )
 	return $ptms_marquee;	
 }
 
-
 function ptms_install() 
 {
 	add_option('ptms_title', "Post title marquee scroll");
-	
 	add_option('ptms_scrollamount', "2");
 	add_option('ptms_scrolldelay', "5");
 	add_option('ptms_direction', "left");
 	add_option('ptms_style', "color:#FF0000;font:Arial;");
-
 	add_option('ptms_noofpost', "10");
 	add_option('ptms_categories', "");
 	add_option('ptms_orderbys', "ID");

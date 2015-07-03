@@ -20,14 +20,14 @@
 //Added by WP-Cache Manager
 
 define('WP_CACHE', true); //Added by WP-Cache Manager
-define( 'WPCACHEHOME', 'C:\xampp\htdocs\feriadelasfloresmedellin\wp-content\plugins\wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/var/www/feriadelasfloresmedellin/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('DB_NAME', 'feriaflores');
 
 /** Tu nombre de usuario de MySQL */
 define('DB_USER', 'root');
 
 /** Tu contraseña de MySQL */
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'mysql');
 
 /** Host de MySQL (es muy probable que no necesites cambiarlo) */
 define('DB_HOST', 'localhost');
