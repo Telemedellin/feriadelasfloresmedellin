@@ -575,7 +575,6 @@ span.hoy {
 	
 	
 /* CONTENIDO */
-
 .tit {
 	margin:20px 0 10px 0;
 	min-height:31px;
@@ -586,7 +585,6 @@ span.hoy {
 	/*box-shadow: #ccc 2px 3px 1px;*/
 	padding:17px 0.7% 0 0.7%;
 	font-family: 'Open Sans', sans-serif;
-	color:#3DBFAA;
 	font-size:36px;
     font-weight: bold;
 	}
@@ -1144,13 +1142,13 @@ background: #333333;
 	margin-top:20px;}
 
 .infoTurismo {
-	margin:0 0 40px 0;}
+	margin:40px 0 40px 0;}
 
 .infoTurismo h3 {
-	color:#47b6dd;
+	color:#3EBFAC;
 	font-family: 'Open Sans', sans-serif;
     border-bottom: 1px solid #FEFC00;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
 	}
 
@@ -1352,7 +1350,7 @@ input, textarea, select, .uneditable-input {
 .category-historia h2 {
 	font-family: 'Open Sans', sans-serif;
 	font-size:24px;
-	color:#84aa1f;
+	color:#E91D74;
 	border-bottom:2px solid;
 	text-align:center;	
 	}
@@ -1414,11 +1412,6 @@ input, textarea, select, .uneditable-input {
 	}
 
 	.single-post .post_content  {
-	background-color:#F9F9F9;
-	border-radius:8px;
-	-webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-	box-shadow: #ccc 2px 3px 1px;
 	padding:15px;
 	margin-top:0px;
 
@@ -1437,21 +1430,27 @@ input, textarea, select, .uneditable-input {
 
 	}
 
+.prensa
+{
+    height:45px;
+}
+
 .prensa a {
-	background-color:#FEFC00;
+	background-color:#E91D74;
 	display:block;
-	height:30px;
-	color:#47b6dd;
+	height:40px;
+	color:#FFF;
 	font-weight:bold;
-	padding:7px 7px 0 7px;
+	padding:15px 7px 0 7px;
 	box-shadow: #ccc 1px 1px 2px;
 	text-align:center;
 	margin:10px 0 10px 0
 	}
 
 .prensa a:hover {
-	background-color:#FEFC00;
-	text-decoration:none;
+    background-color: #FEFC00;
+    text-decoration: none;
+    color: #E91D74;
 	}
 
 .descarga a {
@@ -1508,13 +1507,16 @@ input, textarea, select, .uneditable-input {
 
 .breadcrumb {
 	font-family: 'Open Sans', sans-serif;
-	color:#663109;
+	color:#732181;
 	font-size:14px;
 	font-weight:bold;
 	background-color:transparent;
 	height:43px;
 	padding: 8px 15px 15px 0px;
 	margin: 0 0 20px 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
 	}
 .breadcrumb > li {
 	height:43px;
@@ -1544,9 +1546,9 @@ input, textarea, select, .uneditable-input {
 	}
 
 .page-header {
-	padding-bottom: 9px;
+	padding-bottom: 5px;
 	margin: 0px 0px  0 0px;
-	border-bottom: 1px solid #eeeeee;
+	border-bottom: 0px solid #eeeeee;
 	}
 
 .calendar{
@@ -2333,25 +2335,12 @@ li.previous a:hover:before{
 blockquote.pull-left{
 	padding-right: 15px;
 }
-
 div.destacado.element h2{
 	padding: 18px 65px 10px 10px;
-	color: #3EBFAC;
-	font-weight: bold;
-	min-height: 70px;
-	position: relative;
-}
-
-div.destacado.element h2:after {
-	content: "";
-	width: 50px;
-	height: 50px;
-	display: block;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	background: url(images/icon-images.png);
-	background-position: -8px -6px;
+	background: url(images/icon-images.png) #F4F9E3 no-repeat right 5px;
+    background-position-x: 240px;
+    color: #3EBFAC;
+    font-weight: bold;
 }
 
 /* Landscape phone to portrait tablet */
@@ -3561,7 +3550,9 @@ footer > #inner-footer > span
     color: #3EBFAC;
     margin-top: 20px;
     margin-left: 70px;
-    width:220px;
+    width: 270px;
+    font-family: 'Open Sans',sans-serif;
+    font-style: initial;
 }
 
 .month
@@ -3586,7 +3577,9 @@ footer > #inner-footer > span
     color: #009EE2;
     margin-top: 20px;
     margin-left: 70px;
-    width:220px;
+    width: 270px;
+    font-family: 'Open Sans',sans-serif;
+    font-style: initial;
 }
 
 .icono-historia
@@ -3594,7 +3587,7 @@ footer > #inner-footer > span
     position: initial;
     display: block;
     background: url(images/icon-images.png) no-repeat;
-    background-position: 0px -124px;
+    background-position: 0px -122px;
     width: 60px;
     height: 60px;
     float: left;
@@ -3606,7 +3599,9 @@ footer > #inner-footer > span
     color: #EA1D75;
     margin-top: 20px;
     margin-left: 70px;
-    width:220px;
+    width: 270px;
+    font-family: 'Open Sans',sans-serif;
+    font-style: initial;
 }
 
 .icono-salaprensa
@@ -3626,7 +3621,9 @@ footer > #inner-footer > span
     color: #732181;
     margin-top: 20px;
     margin-left: 70px;
-    width:220px;
+    width: 270px;
+    font-family: 'Open Sans',sans-serif;
+    font-style: initial;
 }
 
 .icono-contacto
@@ -3634,7 +3631,7 @@ footer > #inner-footer > span
     position: initial;
     display: block;
     background: url(images/icon-images.png) no-repeat;
-    background-position: 0px -240px;
+    background-position: 0px -243px;
     width: 60px;
     height: 60px;
     float: left;
@@ -3646,7 +3643,9 @@ footer > #inner-footer > span
     color: #ED7203;
     margin-top: 20px;
     margin-left: 70px;
-    width:220px;
+    width: 270px;
+    font-family: 'Open Sans',sans-serif;
+    font-style: initial;
 }
 
 .icono-envivo
@@ -3666,7 +3665,9 @@ footer > #inner-footer > span
     color: #EA1D75;
     margin-top: 20px;
     margin-left: 70px;
-    width:250px;
+    width: 270px;
+    font-family: 'Open Sans',sans-serif;
+    font-style: initial;
 }
 
 .titulo-programacion
@@ -3742,4 +3743,191 @@ footer > #inner-footer > span
     display: block;
     float: left;
     margin-top: -4px;
+}
+
+.pagination
+{
+    width: 385px;
+    margin: 0 auto;
+}
+
+.pagination > li
+{
+    float: left;
+}
+
+.pagination > li > a
+{
+    background-color: #FEFC00;
+    color: #E91D74;
+    padding: 7px 15px 7px 15px;
+    margin: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.pagination > li > a:hover
+{
+    background-color: #E91D74;
+    color: #FFF;
+}
+
+.pagination > li > a.active
+{
+    background-color: #E91D74;
+    color: #FFF;
+}
+
+.iconos-container
+{
+    float: left;
+    height: 65px;
+}
+
+#iconos-sociales
+{
+    color: #732181;
+    font-weight: bold;
+}
+
+.icono-fb
+{
+    display: block;
+    float: right;
+    background: url(images/iconos-prensa.jpg);
+    background-position: -50px -8px;
+    width: 30px;
+    height: 30px;
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
+.icono-tt
+{
+    display: block;
+    float: right;
+    background: url(images/iconos-prensa.jpg);
+    background-position: -50px -51px;
+    width: 30px;
+    height: 30px;
+    margin-top: -6px;
+    margin-left: 5px;
+}
+
+.read
+{
+    display: inline-block;
+    background-color: #E91D74;
+    color: #FFF;
+    margin-top: 5px;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+}
+
+.read:hover
+{
+    background-color: #FEFC00;
+    color: #E91D74;
+    text-decoration: none;
+}
+
+#novedades > .kitdeprensa > div > article > section > h2
+{
+    color: #732181;
+}
+
+#content > #main > article > section > .contenido-multimedia > img:first-child,
+#content > #main > article > section > .contenido-multimedia > p:first-child
+{
+    float: left;
+}
+
+#content > #main > article > header > .multimedia > h1
+{
+    background-color: #fff;
+    border-radius:0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    box-shadow: none;
+    padding: 5px 5px 5px 10px;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 22px;
+    font-weight: bold;    
+    color: #732181;
+}
+
+
+#content > #main > article > header > .multimedia > .breadcrumb
+{
+    border-bottom: 2px solid;
+}
+
+.contenedor-general > div#content
+{
+    border-bottom: 2px dotted;
+    padding-bottom: 50px;
+}
+
+.download-attachments
+{
+    margin-top: 40px;
+}
+
+.download-attachments > table > tbody > tr > td
+{
+    border-top: 0px solid;
+    border-bottom: 1px solid #732181;
+    padding-bottom: 2px;
+    vertical-align: bottom;
+}
+
+.attachment-icono {width:25px;}
+.attachment-title {width:180px;word-wrap: break-word;}
+.attachment-descarga {width: 105px;font-weight: bold;}
+
+.attachment-title > a
+{
+    color: #732181;
+    font-weight: bold;
+}
+
+.descarga-text
+{
+    float: right;
+    margin: 0px;
+}
+
+span.descarga
+{
+    display: block;
+    float: right;
+    background: url(images/iconos-prensa.jpg);
+    background-position: -9px -50px;
+    width: 26px;
+    height: 30px;
+    margin-left: 7px;
+    margin-top: -10px;
+}
+
+span.file
+{
+    display: block;
+    background: url(images/iconos-prensa.jpg);
+    background-position: -9px -8px;
+    width: 26px;
+    height: 30px;
+}
+
+span.audio
+{
+    display: block;
+    background: url(images/iconos-prensa.jpg);
+    background-position: -9px -97px;
+    width: 26px;
+    height: 30px;
+}
+
+#main > #novedades > .kitdeprensa > div.span6
+{
+	margin-left: 5px;
 }

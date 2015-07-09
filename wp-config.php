@@ -73,7 +73,7 @@ define('NONCE_SALT', 'pon aquí tu frase aleatoria'); // Cambia esto por tu fras
 * Emplea solo números, letras y guión bajo.
 */
 
-$table_prefix  = 'wp_';
+$table_prefix = 'isrwytthv_';
 
 /**
 * Idioma de WordPress.

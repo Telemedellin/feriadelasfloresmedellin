@@ -35,16 +35,16 @@
             <div class="descargarProgramacion row-fluid"> 
                 <div class="low span6">
                     <?php if(qtrans_getLanguage() == 'es'): ?>
-                    <a id="programacion-baja" href="<?php bloginfo('template_directory'); ?>/descargables/Programacion.pdf" class="btn" target="_blank">
+                    <a class="programacion-baja btn" href="<?php bloginfo('template_directory'); ?>/descargables/programacion-feria-de-las-flores-2015.pdf" target="_blank">
                         Programación en PDF (Calidad baja)
                     </a>
                     <?php else: ?>
-                    <a id="programacion-baja" href="<?php bloginfo('template_directory'); ?>/descargables/Programacion_eng.pdf" class="btn" target="_blank">
+                    <a class="programacion-baja btn" href="<?php bloginfo('template_directory'); ?>/descargables/programacion-feria-de-las-flores-2015.pdf"  target="_blank">
                         Download PDF schedule here (Low quality)
                     </a>
                     <?php endif; ?>
                 </div>
-                <div class="hd span6"> 
+               <!-- <div class="hd span6"> 
                     <?php if(qtrans_getLanguage() == 'es'): ?>
                     <a id="programacion-alta" href="<?php bloginfo('template_directory'); ?>/descargables/Programacion_hd.pdf" class="btn" target="_blank">
                         Programación en PDF (Calidad alta)
@@ -54,7 +54,7 @@
                         Download PDF schedule here ( Full HD )
                     </a>
                     <?php endif; ?>
-                </div>
+                </div> -->
             </div>
             <!-- cierra .descargarProgramacion --> 
     

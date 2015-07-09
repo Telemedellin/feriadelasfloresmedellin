@@ -120,6 +120,10 @@ jQuery(document).ready(function($) {
 	});
   }
 
+  $(".descargarProgramacion .programacion-baja").on('click', function() {
+  		ga('send', 'event', 'descargas', 'PDF', 'programacion-feria-de-las-flores-2015.pdf');
+  });
+
   if( $('#avatar').length )
   {
   	'use strict';
