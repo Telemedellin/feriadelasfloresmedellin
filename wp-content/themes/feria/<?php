@@ -1,0 +1,14 @@
+<?php 
+
+$precio = 0;
+
+function emerson($a)
+{
+	$a = 2500;
+}
+
+emerson($precio);
+
+echo $precio;
+
+?>

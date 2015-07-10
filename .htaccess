@@ -5,12 +5,6 @@
 		
 	# END Hide Backend
 	# BEGIN Tweaks
-		# Rules to disable XML-RPC
-		<files xmlrpc.php>
-			Order allow,deny
-			Deny from all
-		</files>
-		
 		# Rules to disable directory browsing
 		Options -Indexes
 		

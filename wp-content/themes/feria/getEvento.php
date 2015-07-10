@@ -29,7 +29,7 @@ $myQuery = new WP_Query(array(
     $telefono   = get_post_meta($post->ID,'telefono',true);
     $precio     = get_post_meta($post->ID,'precio',true);
 
-    $jornadas = explode(',', $jornada);
+    //$jornadas = explode(',', $jornada);
     $humanHoraInicio = date("g:i a", strtotime($horaInicio));
 
     if(trim($horaFin) === ""){
@@ -43,9 +43,9 @@ $myQuery = new WP_Query(array(
 
     $class = "";
 
-    foreach ($jornadas as $j) {
+   foreach ($jornada as $j) {
       $class .= trim($j) . " ";
-    }
+    } 
     ?>
       <?php if($fechaSeleccionada >= $fechaInicio AND $fechaSeleccionada <= $fechaFin): ?>  
 
@@ -94,12 +94,12 @@ $myQuery = new WP_Query(array(
 
         $horaInicio        = get_post_meta($post->ID,'hora_inicio',true);
         $horaFin           = get_post_meta($post->ID,'hora_fin',true);
-        $jornada           = get_post_meta($post->ID,'jornada',true);
+        //jornada es un Array
+        $jornada           = get_post_meta($post->ID,'jornada',false);
         $lugar             = get_post_meta($post->ID,'lugar',true);
         $telefono          = get_post_meta($post->ID,'telefono',true);
         $precio            = get_post_meta($post->ID,'precio',true);
 
-        $jornadas = explode(',', $jornada);
         $humanHoraInicio = date("g:i a", strtotime($horaInicio));
 
         if(trim($horaFin) === ""){
@@ -112,14 +112,15 @@ $myQuery = new WP_Query(array(
 
 
         $class = "";
-
-        foreach ($jornadas as $j) {
-          $class .= trim($j) . " ";
+        foreach ($jornada as $j) {
+          $class .= $j . " ";
         }
+
         ?>
           <?php if($fechaSeleccionada >= $fechaInicio AND $fechaSeleccionada <= $fechaFin): ?>  
 
           <?php
+
               $evento_class = '';
               $posttags = get_the_tags();
               if ($posttags) 

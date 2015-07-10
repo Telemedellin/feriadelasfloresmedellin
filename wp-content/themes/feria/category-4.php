@@ -135,12 +135,12 @@
 
                         $horaInicio = get_post_meta($post->ID,'hora_inicio',true);
                         $horaFin    = get_post_meta($post->ID,'hora_fin',true);
+                        //jornada es un Array
                         $jornada    = get_post_meta($post->ID,'jornada',true);
                         $lugar      = get_post_meta($post->ID,'lugar',true);
                         $telefono   = get_post_meta($post->ID,'telefono',true);
                         $precio     = get_post_meta($post->ID,'precio',true);
 
-                        $jornadas = explode(',', $jornada);
                         $humanHoraInicio = date("g:i a", strtotime($horaInicio));
                         if(trim($horaFin) === "")
                         {
@@ -154,7 +154,7 @@
 
                         $class = "";
 
-                        foreach ($jornadas as $j)
+                        foreach ($jornada as $j)
                         {
                             $class .= trim($j) . " ";
                         }
@@ -214,12 +214,13 @@
 
                             $horaInicio = get_post_meta($post->ID,'hora_inicio',true);
                             $horaFin    = get_post_meta($post->ID,'hora_fin',true);
+                           //jornada es un Array
                             $jornada    = get_post_meta($post->ID,'jornada',true);
                             $lugar      = get_post_meta($post->ID,'lugar',true);
                             $telefono   = get_post_meta($post->ID,'telefono',true);
                             $precio     = get_post_meta($post->ID,'precio',true);
 
-                            $jornadas = explode(',', $jornada);
+                       
                             $humanHoraInicio = date("g:i a", strtotime($horaInicio));
                             if(trim($horaFin) === "")
                             {
@@ -233,7 +234,7 @@
 
                             $class = "";
 
-                            foreach ($jornadas as $j)
+                            foreach ($jornada as $j)
                             {
                                 $class .= trim($j) . " ";
                             }

@@ -33,7 +33,7 @@
 					}?>
 				</header> <!-- end article header -->
 				<section class="post_content clearfix" itemprop="articleBody">
-					<?php the_content(); ?>
+					<?php echo wpautop( get_the_content() ) ?>
 					
 					<!-- Muestra los Campos Personalizados -->
 					<?php $category = get_the_category(); ?>
